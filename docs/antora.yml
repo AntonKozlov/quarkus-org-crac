@@ -1,0 +1,5 @@
+name: quarkus-org-crac
+title: Quarkus - Org Crac
+version: dev
+nav:
+  - modules/ROOT/nav.adoc
