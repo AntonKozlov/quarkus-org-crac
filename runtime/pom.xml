@@ -14,9 +14,31 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>crac</artifactId>
+      <version>999-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.crac</groupId>
+      <artifactId>org-crac</artifactId>
+      <version>0.1.2</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+        <configuration>
+          <runnerParentFirstArtifacts>
+            <!-- quarkus-org-crac needs to be in the same class loader as io.quarkus.crac to be discovered by ServiceLoader -->
+            <runnerParentFirstArtifact>io.quarkiverse.quarkus-org-crac:quarkus-org-crac</runnerParentFirstArtifact>
+            <!-- org-crac should be in the same loader as dependency -->
+            <runnerParentFirstArtifact>io.github.crac:org-crac</runnerParentFirstArtifact>
+          </runnerParentFirstArtifacts>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
